@@ -84,16 +84,22 @@ class GRIBDownloader:
 
         # Download the files. It will try for a few times,  then time out.
         for f in tqdm(self.fname):
-            while tries < maxtries:
-                try:
 
-                    getter.retrieve(self.url + f, f)
+            try:
+                print self.url + f
+                getter.retrieve(self.url + f, f)
 
-                except IOError:
+            except IOError:
+                while tries < maxtries:
                     tries = tries + 1
                     print 'File not found, trying again in ' + str(sleep)
                     time.sleep(sleep)
 
+                    getter.retrieve(self.url + f, f)
+
                     if tries == maxtries:
                         print 'Max tries exceeded, check logs!'
+                        with open('download.log', 'w') as log:
+                            log.write('Could not find '
+                                      + self.model + ' files')
                         break
