@@ -86,7 +86,6 @@ class GRIBDownloader:
         for f in tqdm(self.fname):
 
             try:
-                print self.url + f
                 getter.retrieve(self.url + f, f)
 
             except IOError:
