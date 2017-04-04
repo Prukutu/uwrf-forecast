@@ -43,7 +43,7 @@ class GRIBDownloader:
 
         self.url = source[model] + self.year + self.month + self.day + '/'
 
-    def getFiles(self, inittime='00', maxtries=5, sleep=5):
+    def getFiles(self, inittime='00', maxtries=5, sleep=10):
 
         """ This method fetches the actual files from the NOMADS server.
             It will retrieve 3-hourly files at the forecast initialization
@@ -93,7 +93,7 @@ class GRIBDownloader:
                 while tries < maxtries:
                     tries = tries + 1
                     print 'File not found, trying again in ' + str(sleep)
-                    time.sleep(sleep)
+                    time.sleep(sleep*60)
 
                     getter.retrieve(self.url + f, f)
 
@@ -101,5 +101,5 @@ class GRIBDownloader:
                         print 'Max tries exceeded, check logs!'
                         with open('download.log', 'w') as log:
                             log.write('Could not find '
-                                      + self.model + ' files')
+                                      + self.model + ' files\n')
                         break
