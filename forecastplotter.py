@@ -7,6 +7,7 @@ from mpl_toolkits.basemap import Basemap
 def data_extract(wrffiles, varname):
 
     # Extract a single variable from a set of wrf files.
+    # Data is converted to a numpy array for ease of use.
 
     fobjs = [nc.netcdf_file(f, 'r', mmap=False) for f in wrffiles]
     data = np.asarray([f.variables[varname][0, :, :] for f in fobjs])
