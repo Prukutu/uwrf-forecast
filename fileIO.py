@@ -1,8 +1,9 @@
 import subprocess
+from datetime import datetime
+import os
 
 
 class iRodsGetter:
-
     """ A class to extract files on SR1 using the irods interface."""
 
     def __init__(self, workdir='/cunyZone/home/luis.ortiz/forecast/'):
@@ -60,3 +61,13 @@ class wrfFileGetter:
         print filetoget
 
         subprocess.call(['ln', '-sf', filetoget])
+
+    def getTodayFcst(self,
+                     workdir='/scratch/luis.ortiz/fcsteval/',
+                     dom='d03'):
+        today = datetime.today().strftime('%Y%m%d')
+
+        datadir = '/'.join(['/scratch', 'luis.ortiz', 'forecast', today])
+
+        os.chdir(workdir)
+        subprocess.call(['ln', '-sf', datadir + '/wrfout_' + dom])
