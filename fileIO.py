@@ -1,6 +1,7 @@
 import subprocess
 from datetime import datetime
 import os
+import glob
 
 
 class iRodsGetter:
@@ -70,4 +71,6 @@ class wrfFileGetter:
         datadir = '/'.join(['/scratch', 'luis.ortiz', 'forecast', today])
 
         os.chdir(workdir)
-        subprocess.call(['ln', '-sf', datadir + '/wrfout_' + dom])
+        filelist = glob.glob(datadir + '/wrfout_' + dom)
+        for f in filelist:
+            subprocess.call(['ln', 'sf', datadir + '/' + f])
