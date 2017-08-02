@@ -37,7 +37,7 @@ class pointFind:
             self.lon = longrid
 
         self.lat = latgrid
-        luloc = '/home/luis/Documents/CCNY/Research/pymodules/lu.nc'
+        luloc = './lu.nc'
         lufile = nc.netcdf_file(luloc)
         self.lu = lufile.variables['LU_INDEX'][:].squeeze()
 
