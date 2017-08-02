@@ -40,7 +40,7 @@ def createMap(ax,
                  lon_0=cenlon,
                  projection=proj,
                  resolution=resolution,
-                 #    ax=ax,
+                 ax=ax,
                  fix_aspect=False)
 
     return mp
