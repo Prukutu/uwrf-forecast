@@ -63,10 +63,11 @@ class wrfFileGetter:
 
         subprocess.call(['ln', '-sf', filetoget])
 
-    def getTodayFcst(self,
-                     workdir='/scratch/luis.ortiz/fcsteval/',
-                     dom='d03'):
-        today = datetime.today().strftime('%Y%m%d')
+    def getFcst(self,
+                date,
+                workdir='/scratch/luis.ortiz/fcsteval/',
+                dom='d03'):
+        today = date.strftime('%Y%m%d')
 
         datadir = '/'.join(['/scratch', 'luis.ortiz', 'forecast', today])
 
