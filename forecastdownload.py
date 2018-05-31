@@ -1,8 +1,12 @@
 import urllib
 from datetime import datetime
-from tqdm import tqdm
 import time
 
+try:
+    # Check that tqdm exists
+    from tqdm import tqdm
+except ImportError:
+    'tqdm not found. Re-install using conda or pip'
 
 class GRIBDownloader:
     """ A class to set up downloads from the NCEP NOMADS server. Specifically,
@@ -92,7 +96,7 @@ class GRIBDownloader:
                 while tries < maxtries:
                     tries = tries + 1
                     print 'File not found, trying again in ' + str(sleep)
-                    time.sleep(sleep*60)
+                    time.sleep(sleep*60)  # arg for time.sleep in seconds
 
                     getter.retrieve(self.url + f, f)
 
