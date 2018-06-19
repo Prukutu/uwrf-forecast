@@ -157,3 +157,10 @@ def temp_c(P, PB, T):
 
 def geopotential_height(PH, PHB):
     return (PH + PHB)/9.81
+
+
+def eta2height(eta, ptop=10000, pbot=101325, scale_height=8500):
+
+    P = eta*(pbot - ptop) + ptop
+    z = -scale_height*np.log(P/pbot)
+    return z
